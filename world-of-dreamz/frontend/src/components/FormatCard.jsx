@@ -134,6 +134,19 @@ const FormatCard = () => {
             );
           })}
         </div>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mt-16"
+        >
+          <Link
+            to="/attractions"
+            className="inline-block px-12 py-5 bg-gradient-to-r from-[#FFD700] via-[#FF007F] to-[#00FFFF] text-white text-xl font-bold rounded-full hover:shadow-[0_0_30px_rgba(255,0,127,0.6)] transition-all transform hover:scale-105"
+          >
+            Explore Now
+          </Link>
+        </motion.div>
       </div>
     </section>
   );
