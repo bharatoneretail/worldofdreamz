@@ -7,17 +7,15 @@ const FormatCard = () => {
   const [formats, setFormats] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // ✅ FIX: Get API base URL from environment variable
-  const API_BASE = import.meta.env.VITE_API_URL || '';
+    // ✅ FIX: Get API base URL from environment variable
+    const API_BASE = import.meta.env.VITE_API_URL || '';
 
   useEffect(() => {
     const fetchFormats = async () => {
       try {
-        // ✅ FIX: Use full URL for production, relative for local dev
         const url = `${API_BASE}/api/attractions`;
-        console.log("🔍 Fetching formats from:", url);
-        
-        const res = await axios.get(url);
+         console.log("🔍 Fetching formats from:", url);
+        const res = await axios.get("/api/attractions");
         const data = res.data?.data || [];
         setFormats(Array.isArray(data) ? data : []);
       } catch (err) {
@@ -28,12 +26,15 @@ const FormatCard = () => {
       }
     };
     fetchFormats();
-  }, [API_BASE]);
+  }, []);
 
   const imageMap = {
-    CASTILLO: "https://images.unsplash.com/photo-1596464716127-f2a82984de30?auto=format&fit=crop&w=800&q=80",
-    IMPERIO: "https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac?auto=format&fit=crop&w=800&q=80",
-    PALLACIA: "https://upload.wikimedia.org/wikipedia/commons/9/9b/%D0%9A%D0%BB%D0%B0%D1%81_60.jpg",
+    CASTILLO:
+      "https://images.unsplash.com/photo-1596464716127-f2a82984de30?auto=format&fit=crop&w=800&q=80",
+    IMPERIO:
+      "https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac?auto=format&fit=crop&w=800&q=80",
+    PALLACIA:
+      "https://upload.wikimedia.org/wikipedia/commons/9/9b/%D0%9A%D0%BB%D0%B0%D1%81_60.jpg",
   };
 
   if (isLoading) {
@@ -126,33 +127,27 @@ const FormatCard = () => {
                     </p>
                   </div>
 
-                  <div className="mb-8">
-                    <h4 className="font-bold text-white mb-3 text-lg">
-                      Key Attractions:
-                    </h4>
-                    <ul className="list-disc list-inside text-gray-400 text-sm space-y-1 max-h-32 overflow-y-auto custom-scrollbar">
-                      {attractions.slice(0, 6).map((item, i) => (
-                        <li key={i}>{item}</li>
-                      ))}
-                      {attractions.length > 6 && (
-                        <li className="text-purple-400 font-semibold pt-1">
-                          + {attractions.length - 6} more...
-                        </li>
-                      )}
-                    </ul>
-                  </div>
-
-                  <Link
-                    to={`/format/${format.formatName.toLowerCase().replace(/\s+/g, "-")}`}
-                    className="block w-full py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl font-bold text-center hover:shadow-[0_0_20px_rgba(168,85,247,0.5)] transition-all transform hover:scale-[1.02]"
-                  >
-                    View Full Details
-                  </Link>
+                 
                 </div>
               </motion.div>
             );
           })}
         </div>
+
+        {/* Single Explore Now Button */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mt-16"
+        >
+          <Link
+            to="/attractions"
+            className="inline-block px-12 py-5 bg-gradient-to-r from-[#FFD700] via-[#FF007F] to-[#00FFFF] text-white text-xl font-bold rounded-full hover:shadow-[0_0_30px_rgba(255,0,127,0.6)] transition-all transform hover:scale-105"
+          >
+            Explore Now
+          </Link>
+        </motion.div>
       </div>
     </section>
   );
