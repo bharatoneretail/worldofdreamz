@@ -126,28 +126,9 @@ const FormatCard = () => {
                     </p>
                   </div>
 
-                  <div className="mb-8">
-                    <h4 className="font-bold text-white mb-3 text-lg">
-                      Key Attractions:
-                    </h4>
-                    <ul className="list-disc list-inside text-gray-400 text-sm space-y-1 max-h-32 overflow-y-auto custom-scrollbar">
-                      {attractions.slice(0, 6).map((item, i) => (
-                        <li key={i}>{item}</li>
-                      ))}
-                      {attractions.length > 6 && (
-                        <li className="text-purple-400 font-semibold pt-1">
-                          + {attractions.length - 6} more...
-                        </li>
-                      )}
-                    </ul>
-                  </div>
+                  
 
-                  <Link
-                    to={`/format/${format.formatName.toLowerCase().replace(/\s+/g, "-")}`}
-                    className="block w-full py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl font-bold text-center hover:shadow-[0_0_20px_rgba(168,85,247,0.5)] transition-all transform hover:scale-[1.02]"
-                  >
-                    View Full Details
-                  </Link>
+                  
                 </div>
               </motion.div>
             );
