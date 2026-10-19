@@ -11,10 +11,13 @@ const ContactForm = () => {
     message: '' 
   });
   const [errors, setErrors] = useState({});
-  const [status, setStatus] = useState(''); // 'idle' | 'sending' | 'success' | 'error'
+  const [status, setStatus] = useState(''); 
 
-  // ✅ FIX: Use the env var for production, fallback to relative path for local dev
+  // ✅ CRITICAL FIX: Explicitly define API base with fallback
   const API_BASE = import.meta.env.VITE_API_URL || ''; 
+  
+  // Debug log to verify env var is loaded (Check Browser Console F12)
+  console.log("🔗 API Base URL:", API_BASE); 
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -42,15 +45,18 @@ const ContactForm = () => {
     
     setStatus('sending');
     try {
-      // ✅ FIX: Explicitly point to Render backend
-      await axios.post(`${API_BASE}/api/leads`, formData, {
-        timeout: 60000, // 60s timeout because Render free tier takes ~45s to wake up
+      const targetUrl = `${API_BASE}/api/leads`;
+      console.log("📤 Sending form to:", targetUrl); // Verify destination in console
+      
+      await axios.post(targetUrl, formData, {
+        timeout: 60000, // 60s timeout for Render free tier wake-up
+        headers: { 'Content-Type': 'application/json' }
       }); 
       
       setStatus('success');
       setFormData({ name: '', email: '', phone: '', company: '', interestedFormat: 'Castillo', message: '' });
     } catch (error) { 
-      console.error("Form submission error:", error);
+      console.error("❌ Form submission failed:", error.response?.data || error.message);
       setStatus('error'); 
     }
   };
@@ -69,7 +75,7 @@ const ContactForm = () => {
       )}
       {status === 'error' && (
         <div className="mb-6 p-4 bg-red-50 text-red-700 rounded-lg font-medium text-center border border-red-200 animate-fade-in">
-          ❌ Something went wrong. Please check your connection or WhatsApp us directly.
+           Something went wrong. Please check your connection or WhatsApp us directly.
         </div>
       )}
 
