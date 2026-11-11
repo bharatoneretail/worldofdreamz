@@ -420,7 +420,7 @@ const Attractions = () => {
             Let us help you build an unforgettable entertainment experience with our world-class attractions and turnkey solutions.
           </p>
           <a
-            href="/contact"
+            href="/contact-us"
             className="inline-block px-12 py-5 bg-gradient-to-r from-[#FFD700] via-[#FF007F] to-[#00FFFF] text-white text-xl font-bold rounded-full hover:shadow-[0_0_30px_rgba(255,0,127,0.6)] transition-all transform hover:scale-105 shadow-lg"
           >
             Get in Touch
