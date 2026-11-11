@@ -95,7 +95,7 @@ const HeroSection = () => {
             <div className="absolute inset-0 bg-gradient-to-r from-[#00FFFF] via-[#FF007F] to-[#FFD700] opacity-0 group-hover:opacity-100 transition-opacity"></div>
           </Link>
           <Link 
-            to="/contact" 
+            to="/contact-us" 
             className="px-8 py-4 bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 rounded-full font-bold text-lg transition-all hover:scale-105"
           >
             Get a Custom Quote

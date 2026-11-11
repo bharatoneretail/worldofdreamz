@@ -51,7 +51,7 @@ const Navbar = () => {
               
               {/* CTA Button */}
               <Link
-                to="/contact"
+                to="/contact-us"
                 className="px-6 py-2.5 bg-gradient-to-r from-[#FFD700] via-[#FF007F] to-[#00FFFF] text-white font-bold rounded-full hover:shadow-[0_0_20px_rgba(255,0,127,0.5)] transition-all transform hover:scale-105"
               >
                 Connect Now
